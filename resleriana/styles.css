@@ -6,6 +6,13 @@
 body {
   background-color: #ecebde;
 }
+.floating-suggestion {
+  position: absolute;
+  background-color: #eb9d86;
+  width: 100px;
+  height: 48px;
+  right: 0px;
+}
 
 .topnav {
   background-color: #f1cc85;
