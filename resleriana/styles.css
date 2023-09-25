@@ -1,0 +1,153 @@
+:root {
+  --page-center: 0px;
+  --page-width: 0px;
+}
+
+body {
+  background-color: #ecebde;
+}
+
+.topnav {
+  background-color: #f1cc85;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #0c0b0b;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.hidden {
+  display: none;
+}
+
+.topnav a:hover {
+  background-color: #eb9d86;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #dedede;
+  color: white;
+}
+
+.data-table {
+  background-color: aqua;
+  overflow-x: scroll;
+}
+
+.h-scroll-wrapper {
+  position: absolute;
+  background-color: aqua;
+  width: 115px;
+  height: calc(var(--page-width) * 0.825);
+  overflow-y: auto;
+  overflow-x: hidden;
+  transform: rotate(-90deg) translateX(-125px)
+    translateY(calc(var(--page-width) * 0.15 / 2));
+  transform-origin: top left;
+}
+
+.h-scroll-wrapper > div {
+  background-color: #eb9d86;
+  margin: 3px;
+  width: 100px;
+  height: 100px;
+  transform: rotate(90deg);
+}
+
+.chara-icon {
+  width: 100px;
+  height: 100px;
+}
+
+.character-container {
+  position: relative;
+  display: flex;
+  width: 80%;
+  top: 150px;
+  left: 10%;
+}
+
+.character-figure-container {
+  background: #0c0b0b;
+  box-sizing: border-box;
+  flex: 1;
+  width: 50%;
+  text-align: center;
+}
+/* Empty class*/
+.full-scale-image {
+  opacity: 1;
+}
+
+.character-info-container {
+  flex: 1;
+  width: 50%;
+  box-sizing: border-box;
+  font-family: "Nunito Sans", "Noto Sans JP", sans-serif;
+  font-weight: 550;
+
+  background-color: #555;
+}
+
+.character-info-table {
+  background-color: aquamarine;
+  border-radius: 20px;
+  width: 90%;
+  height: 70%;
+  padding: 10px;
+  margin-top: 20%;
+  margin-left: 5%;
+}
+
+.table-title {
+  height: 50px;
+}
+.character-name {
+  font-weight: 700;
+  font-size: 30px;
+}
+
+.table-types {
+  height: 35px;
+}
+
+.table-compact {
+  height: 25px;
+}
+
+@media screen and (max-width: 900px) {
+  .character-container {
+    flex-wrap: wrap;
+  }
+  .character-info-container {
+    flex-basis: 100%;
+  }
+}
+
+.footer {
+  margin-top: 200px;
+}
+/* Website Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  opacity: 0.2;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+  background: rgba(44, 36, 36, 0.1);
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
