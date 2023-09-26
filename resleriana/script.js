@@ -73,7 +73,7 @@ function clockTick() {
 async function askTime() {
   var xmlHttp = new XMLHttpRequest();
 
-  xmlHttp.open("GET", "http://worldtimeapi.org/api/timezone/Japan", true);
+  xmlHttp.open("GET", "https://worldtimeapi.org/api/timezone/Japan", true);
   xmlHttp.onload = function () {
     if (xmlHttp.status == 200) {
       serverTime = datetimeToObj(JSON.parse(xmlHttp.responseText).datetime);
