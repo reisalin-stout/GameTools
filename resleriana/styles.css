@@ -9,9 +9,10 @@ body {
 .floating-suggestion {
   position: absolute;
   background-color: #eb9d86;
-  width: 100px;
-  height: 48px;
+  width: 200px;
+  height: 120px;
   right: 0px;
+  z-index: 10;
 }
 
 .topnav {

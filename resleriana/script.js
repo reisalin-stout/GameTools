@@ -39,7 +39,8 @@ function openPage(address) {
 //Main function
 async function main() {
   await getDatabase();
-  await askTime(setTime);
+  await askTime();
+  clockTick();
 }
 
 //Event Listeners
@@ -55,25 +56,72 @@ function resizeTable() {
 
 window.addEventListener("resize", resizeTable);
 
-function setTime(time) {
-  console.log(time.hour, time.minute, time.seconds);
-  document.getElementById("current-time").innerHTML =
-    time.hour + ":" + time.minute + ":" + time.seconds;
+var serverTime = {
+  valid: false,
+  date: "",
+  time: 0,
+};
+
+function clockTick() {
+  if (serverTime.valid) {
+    serverTime.time += 1;
+    updateTime();
+  }
+  setTimeout(clockTick, 1000);
 }
 
-async function askTime(callback) {
+async function askTime() {
   var xmlHttp = new XMLHttpRequest();
 
-  xmlHttp.open(
-    "GET",
-    "https://www.timeapi.io/api/Time/current/zone?timeZone=Japan",
-    true
-  );
+  xmlHttp.open("GET", "http://worldtimeapi.org/api/timezone/Japan", true);
   xmlHttp.onload = function () {
     if (xmlHttp.status == 200) {
-      callback(xmlHttp.responseText);
+      serverTime = datetimeToObj(JSON.parse(xmlHttp.responseText).datetime);
     }
   };
 
   xmlHttp.send(null);
+}
+
+function updateTime() {
+  document.getElementById("current-time").innerHTML = `Date : ${
+    serverTime.date
+  } <br> Server Time : ${intToTime(serverTime.time).hours}:${
+    intToTime(serverTime.time).minutes
+  }:${intToTime(serverTime.time).seconds}`;
+
+  document.getElementById("reset-countdown").innerHTML = `Reset : ${
+    intToTime(86400 - serverTime.time).hours
+  }:${intToTime(86400 - serverTime.time).minutes}:${
+    intToTime(86400 - serverTime.time).seconds
+  }`;
+
+  var pieTime =
+    serverTime.time < 43200 ? 43200 : serverTime.time < 64800 ? 64800 : 129600;
+  document.getElementById("pie-countdown").innerHTML = `Next Pie : ${
+    intToTime(pieTime - serverTime.time).hours
+  }:${intToTime(pieTime - serverTime.time).minutes}:${
+    intToTime(pieTime - serverTime.time).seconds
+  }`;
+}
+
+function intToTime(integer) {
+  var time = {
+    hours: Math.floor(integer / 3600),
+    minutes: Math.floor((integer % 3600) / 60),
+    seconds: (integer % 3600) % 60,
+  };
+  return time;
+}
+
+function datetimeToObj(datetime) {
+  var object = {
+    valid: datetime ? true : false,
+    date: datetime.split("T")[0],
+    time:
+      parseInt(datetime.split("T")[1].split(".")[0].split(":")[0]) * 3600 +
+      parseInt(datetime.split("T")[1].split(".")[0].split(":")[1]) * 60 +
+      parseInt(datetime.split("T")[1].split(".")[0].split(":")[2]),
+  };
+  return object;
 }
