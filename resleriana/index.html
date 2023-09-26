@@ -12,12 +12,13 @@
     <script src="./script.js" defer></script>
   </head>
   <body>
-    <button
-      class="floating-suggestion"
-      onclick="window.open('https://forms.gle/TkZ1d7YhMvyu6re99')"
-    >
-      Suggestion Box
-    </button>
+    <div class="floating-suggestion">
+      <button onclick="window.open('https://forms.gle/TkZ1d7YhMvyu6re99')">
+        Suggestion Box
+      </button>
+      <br />
+      Server time: <span id="current-time"></span>
+    </div>
     <nav class="topnav" id="navbar">
       <a class="database" id="nav-db" onclick="openPage('database')"
         >Character Database</a
@@ -154,7 +155,15 @@
         </div>
       </div>
     </div>
-
+    <div id="common">
+      <table>
+        <tbody>
+          <tr>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <footer class="footer">2023 CC</footer>
   </body>
 </html>

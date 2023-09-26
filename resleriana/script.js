@@ -39,6 +39,7 @@ function openPage(address) {
 //Main function
 async function main() {
   await getDatabase();
+  await askTime(setTime);
 }
 
 //Event Listeners
@@ -53,3 +54,26 @@ function resizeTable() {
 }
 
 window.addEventListener("resize", resizeTable);
+
+function setTime(time) {
+  console.log(time.hour, time.minute, time.seconds);
+  document.getElementById("current-time").innerHTML =
+    time.hour + ":" + time.minute + ":" + time.seconds;
+}
+
+async function askTime(callback) {
+  var xmlHttp = new XMLHttpRequest();
+
+  xmlHttp.open(
+    "GET",
+    "https://www.timeapi.io/api/Time/current/zone?timeZone=Japan",
+    true
+  );
+  xmlHttp.onload = function () {
+    if (xmlHttp.status == 200) {
+      callback(xmlHttp.responseText);
+    }
+  };
+
+  xmlHttp.send(null);
+}
